@@ -1,3 +1,4 @@
+# Puppet script to configure SSH client to use a specific private key and disable password authentication
 class ssh_config {
   file_line { 'Declare identity file':
     path  => '/etc/ssh/ssh_config',
