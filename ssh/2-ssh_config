@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Scripts to configure
+Host School
+	Hostname 54.226.195.157
+	User ubuntu
+	IdentifyFile ~/.ssh/school
+	PasswordAuthentication no
