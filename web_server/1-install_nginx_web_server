@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Sets up Nginx on a new Ubuntu machine with firewall rules and a custom homepage.
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+sudo apt-get install ufw
+sudo ufw enable
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 'OpenSSH'
+
+echo 'Holberton School' | sudo tee /var/www/html/index.html
+
+sudo service nginx restart
+
