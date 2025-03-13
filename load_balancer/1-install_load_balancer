@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This script installs and configures HAProxy as a load balancer on lb-01
+# It directs traffic to two backend web servers: web-01 and web-02
+
+# Update package lists
+sudo apt-get -y update
+
+# Install HAProxy
+sudo apt-get -y install haproxy
+
+# Enable HAProxy to start with the system
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Backup the original HAProxy configuration file
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
+
+# Configure HAProxy to load balance HTTP traffic between web-01 and web-02
+echo \
+"
+frontend lb-frontend
+        bind *:80
+        mode http
+        default_backend lb-backend
+
+backend lb-backend
+        balance roundrobin
+        server web-01 34.207.159.215:80 check
+        server web-02 18.212.61.181:80 check
+" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# Restart HAProxy to apply changes
+sudo service haproxy restart
