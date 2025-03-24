@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Solve nginx default files. The symbolic link is broken.
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+service nginx restart
