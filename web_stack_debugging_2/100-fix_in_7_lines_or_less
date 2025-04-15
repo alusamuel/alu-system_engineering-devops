@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#script that configures container
+sudo sed -i 's/user .*/user nginx/' /etc/nginx/nginx.conf
+sudo sed -i 's/listen .*/listen 8080/' /etc/nginx/sites-enabled/default
+sudo chmod -R 755 /etc/nginx/
+sudo pkill nginx
+sudo -u nginx service nginx start
